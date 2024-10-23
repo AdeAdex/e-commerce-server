@@ -15,7 +15,7 @@ const app = express();
 
 
 const corsOptions = {
-  origin: ["https://www.adullamfashion.com", "https://adullam.vercel.app", "http://localhost:5173"], // Update with your frontend URL
+  origin: ["https://titan-super.vercel.app", "http://localhost:5173"], // Update with your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true, // Enable credentials (cookies, authorization headers, etc.)
