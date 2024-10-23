@@ -19,8 +19,9 @@ const adminSecretKey = process.env.JWT_SECRET_ADMIN;
 
 const callbackURL =
   process.env.NODE_ENV === 'production'
-    ? 'https://adex-e-commerce-server.vercel.app/api/google/callback'
-    : 'http://localhost:5000/api/google/callback';
+    ? 'https://adex-e-commerce-server.vercel.app/api/callback/google'
+    : 'http://localhost:5000/api/callback/google';
+
 
 passport.use(
   new GoogleStrategy(
