@@ -10,23 +10,6 @@ import { StatusCodes } from "http-status-codes";
 import { errorResponse, successResponse } from "./utils/libs/response.lib.js";
 import routes from "./routes/index.js";
 import cookieParser from 'cookie-parser';
-// import { cacheMiddleware } from "./middlewares/cacheMiddleware.js";
-// import { hjdf } from "./utils/libs/ssr.js";   // Import the SSR function
-// import { generateStructuredData } from "./utils/libs/structuredData.js";
-// import { generateXMLSitemap } from "./utils/libs/sitemap.js";
-
-// import CryptoJS from 'crypto-js';
-
-// // Your secret key
-// const secretKey = 'FLWSECK_TEST-6213770d3334139fe355b672604e4a13-X';
-
-// // Generate the hash using SHA-256
-// const secretHash = CryptoJS.SHA256(secretKey).toString(CryptoJS.enc.Hex);
-
-// console.log('Secret Hash:', secretHash);
-
-// 510e6f7931825d641ca8208caf7ee9dd6a0fbe1f3d5d2de12f674308419f5258
-
 
 const app = express();
 
@@ -57,61 +40,29 @@ app.use(cookieParser());
 // Define API routes
 app.use("/api", routes);
 
-
-
-// Server-Side Rendering (SSR) Route
-// app.get("/", cacheMiddleware, async (req, res) => {
-//   try {
-//     // Render page with SSR function
-//     const { html, metaTags } = await renderPageWithSSR(req.url); // Render page with SSR function
-
-//     // Generate structured data
-//     const structuredData = generateStructuredData("Page Title", "Page Description", req.url);
-
-//     // Send HTML response with dynamically generated meta tags
-//     res.send(`
-//       <!DOCTYPE html>
-//       <html lang="en">
-//       <head>
-//           <meta charset="UTF-8">
-//           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//           <meta http-equiv="X-UA-Compatible" content="ie=edge">
-//           <title>Adullam Site</title>
-//           ${metaTags} <!-- Include dynamically generated meta tags -->
-//       </head>
-//       <body>
-//           <div id="root">${html}</div>
-//       </body>
-//       </html>
-//     `);
-//   } catch (error) {
-//     console.error("Error during SSR:", error);
-//     // Render fallback content in case of error
-//     res.send(`
-//       <!DOCTYPE html>
-//       <html lang="en">
-//       <head>
-//           <meta charset="UTF-8">
-//           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//           <meta http-equiv="X-UA-Compatible" content="ie=edge">
-//           <title>Adullam Site</title>
-//       </head>
-//       <body>
-//           <div id="root">Error occurred. Please try again later.</div>
-//       </body>
-//       </html>
-//     `);
-//   }
-// });
-
-// Call the function to generate XML sitemap
-// generateXMLSitemap();
-
-
 // index route
 app.get("/", (_req, res) => {
-  successResponse(res, "Welcome to Adullam Site", StatusCodes.OK);
+  const responseMessage = `
+    Welcome to the e-commerce platform server.
+    Version: ${process.env.APP_VERSION || "1.0.0"}
+    Environment: ${process.env.NODE_ENV || "development"}
+
+    This API powers a comprehensive e-commerce platform with services for both customers and administrators, including:
+      - **Product Listings**: Browse available products with details such as price, description, and stock availability.
+      - **Cart Management**: Add, update, or remove products from your shopping cart.
+      - **Order Processing**: Place and track orders with real-time status updates.
+      - **Customer Authentication**: Secure login and registration features for customers.
+      - **Admin Dashboard**: Manage products, track orders, and monitor store performance through a dedicated admin interface.
+      - **Flutterwave Integration**: Seamless payment processing via Flutterwave, supporting multiple currencies and secure transactions.
+      - **Payment Processing**: Enable secure payments through credit/debit cards, bank transfers, and other methods supported by Flutterwave.
+      - **User Roles**: Differentiated access for customers and admins, ensuring the right privileges for each role.
+
+    Developed by Adex. Please refer to the documentation for available endpoints and detailed usage instructions.
+  `;
+  successResponse(res, responseMessage, StatusCodes.OK);
 });
+
+
 
 // catch 404 errors and forward them to error handler
 app.use((_req, _res, next) => {
