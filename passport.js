@@ -17,12 +17,17 @@ const adminSecretKey = process.env.JWT_SECRET_ADMIN;
 
 // Strategy for user authentication with google
 
+const callbackURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://adex-e-commerce-server.vercel.app/api/google/callback'
+    : 'http://localhost:5000/api/google/callback';
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "/api/google/callback",
+      callbackURL: callbackURL,
     },
     async function (accessToken, refreshToken, profile, done) {
       // console.log("Google ID", profile.id);
