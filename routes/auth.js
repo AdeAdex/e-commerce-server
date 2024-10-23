@@ -5,7 +5,7 @@ import passport from "passport";
 
 const router = Router();
 
-const client_URL = "https://www.adullamfashion.com";
+const client_URL = "https://titan-super.vercel.app";
 
 
 router.get(
